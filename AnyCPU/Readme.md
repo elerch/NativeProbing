@@ -36,3 +36,10 @@ The NativeDLLProbing.cs file in this repo puts both techniques together to enabl
 	NativeDLLProbing.exe YourAssembly.exe [params]
 
 If hosted elsewhere (e.g. ASP.NET), the resulting library can be referenced and called at startup (e.g. Global.asax), passing the base directory into the AddPlatformDependentProbing method.
+
+Sample
+------
+
+The Oracle.DataAccess.dll provides an example of the use case solved by this technique. Once hacked (see OracleDLLHacking.md), there are identically versioned but architecture-specific Oracle.DataAccess.dll assemblies. These assemblies carry dependencies on their native counterparts, also hosted in amd64/x86 directories side by side with the .NET assemblies.
+
+The Test.cs can be compiled referencing either Oracle.DataAccess.dll, and when called through: NativeDLLProbing.exe TestAnyCPU.exe the connectivity tests should pass on either a 32 bit or 64 bit OS.
